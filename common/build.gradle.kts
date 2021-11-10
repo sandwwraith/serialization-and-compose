@@ -4,7 +4,6 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
-//    id("kotlin-android-extensions")
     kotlin("plugin.serialization")
 }
 

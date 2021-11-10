@@ -14,8 +14,6 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
         classpath("org.jetbrains.compose:compose-gradle-plugin:$compose_version")
         classpath("com.android.tools.build:gradle:$android_tools_version")
-//        classpath("com.android.tools.lint:lint:26.3.2")
-
     }
 }
 
