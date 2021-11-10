@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
-    id("kotlin-android-extensions")
+//    id("kotlin-android-extensions")
     kotlin("plugin.serialization")
 }
 
@@ -24,13 +24,13 @@ kotlin {
             kotlinOptions.jvmTarget = "11"
         }
     }
+    js(IR) {
+        browser()
+    }
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material)
-
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_runtime_version")
             }
         }
@@ -41,6 +41,8 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                api(compose.foundation)
+                api(compose.material)
                 api("androidx.appcompat:appcompat:1.2.0")
                 api("androidx.core:core-ktx:1.3.1")
             }
@@ -53,6 +55,20 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 api(compose.preview)
+            }
+        }
+        val desktopAndroidCommon by sourceSets.creating  {
+            dependsOn(commonMain)
+            dependencies {
+                api(compose.foundation)
+                api(compose.material)
+            }
+            desktopMain.dependsOn(this)
+            androidMain.dependsOn(this)
+        }
+        val jsMain by getting {
+            dependencies {
+                api(compose.web.core)
             }
         }
         val desktopTest by getting
