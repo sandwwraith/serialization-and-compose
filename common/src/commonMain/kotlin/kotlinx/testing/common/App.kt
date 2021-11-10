@@ -1,7 +1,5 @@
 package kotlinx.testing.common
 
-import androidx.compose.material.Text
-import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,9 +10,16 @@ import androidx.compose.runtime.setValue
 fun App() {
     var text by remember { mutableStateOf("Hello, World!") }
 
-    Button(onClick = {
+    MyButton(onClick = {
         text = "Hello, ${decodeUser(getPlatformName())}"
     }) {
-        Text(text)
+        MyText(text)
     }
 }
+
+
+@Composable
+expect fun MyButton(onClick: () -> Unit, content: @Composable () -> Unit)
+
+@Composable
+expect fun MyText(text: String)
